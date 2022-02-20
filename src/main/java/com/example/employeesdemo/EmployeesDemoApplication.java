@@ -8,7 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EmployeesDemoApplication implements CommandLineRunner {
+public class EmployeesDemoApplication
+//		implements CommandLineRunner
+{
 
 	@Autowired
 	private EmployeeRepository repository;
@@ -17,12 +19,12 @@ public class EmployeesDemoApplication implements CommandLineRunner {
 		SpringApplication.run(EmployeesDemoApplication.class, args);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		Employee employee = new Employee("John");
-		Employee savedEmployee = repository.save(employee);
-
-		Employee employee2 = new Employee("Doe");
-		Employee savedEmployee2 = repository.save(employee2);
-	}
+//	@Override
+//	public void run(String... args) throws Exception {
+//		Employee employee = new Employee("John");
+//		Employee savedEmployee = repository.save(employee);
+//
+//		Employee employee2 = new Employee("Doe");
+//		Employee savedEmployee2 = repository.save(employee2);
+//	}
 }
