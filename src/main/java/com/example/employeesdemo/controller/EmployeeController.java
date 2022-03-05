@@ -2,6 +2,7 @@ package com.example.employeesdemo.controller;
 
 import com.example.employeesdemo.entity.Employee;
 import com.example.employeesdemo.repository.EmployeeRepository;
+import com.example.employeesdemo.thymeleaf.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,32 +15,27 @@ import java.util.Optional;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeRepository repository;
+    private EmployeeService employeeService;
 
     @GetMapping("/employees")
     public List<Employee> getEmployees() {
-        return repository.findAll();
+        return employeeService.getAllEmployees();
     }
 
     @GetMapping("/employee/{id}")
     public ResponseEntity<Employee> getEmployee(@PathVariable Long id) {
-        Optional<Employee> maybeEmployee = repository.findById(id);
+        Employee employee = employeeService.getEmployeeById(id);
 
-        if(maybeEmployee.isPresent()){
-            return new ResponseEntity(maybeEmployee.get(), HttpStatus.OK);
-        }
-
-        return new ResponseEntity(new Employee(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity(employee, HttpStatus.OK);
     }
 
     @PostMapping("/employees")
     public Employee getEmployees(@RequestBody Employee employee) {
-//        Employee newEmployee = new Employee(employee.getName());
-        return repository.save(employee);
+        return employeeService.saveEmployee(employee);
     }
 
     @DeleteMapping("/employees/{id}")
     public void getEmployees(@PathVariable Long id) {
-        repository.deleteById(id);
+        employeeService.deleteEmployee(id);
     }
 }

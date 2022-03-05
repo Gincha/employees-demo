@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Employee List</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/5.1.3/css/bootstrap.min.css}"/>
+<!--    <link rel="stylesheet" th:href="@{/css/main.css}"/>-->
+
+</head>
+
+<body>
+
+<h1>Employees List</h1>
+
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col"> Id </th>
+            <th scope="col"> Name </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${employeesList.empty}">
+            <td colspan="2"> No Employees Available </td>
+        </tr>
+        <tr th:each="employee : ${employeesList}"
+            scope="row">
+            <td><span th:text="${employee.Id}"> Id </span></td>
+            <td><span th:text="${employee.name}"> Name </span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
