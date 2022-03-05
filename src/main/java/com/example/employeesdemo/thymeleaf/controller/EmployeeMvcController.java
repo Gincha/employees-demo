@@ -1,7 +1,8 @@
-package com.example.employeesdemo.thymeleaf;
+package com.example.employeesdemo.thymeleaf.controller;
 
 import com.example.employeesdemo.entity.Employee;
 import com.example.employeesdemo.thymeleaf.services.EmployeeService;
+import com.example.employeesdemo.thymeleaf.services.EmployeeServiceImpl;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -17,11 +18,11 @@ import java.util.List;
 @Slf4j
 public class EmployeeMvcController {
 
-    private final EmployeeService employeeService;
+    private final EmployeeService employeeServiceImpl;
 
     @GetMapping()
     public String listEmployees(Model model) {
-        List<Employee> employeesList = employeeService.getAllEmployees();
+        List<Employee> employeesList = employeeServiceImpl.getAllEmployees();
         log.info("employeesList size: {}", employeesList.size());
         model.addAttribute("employeesList", employeesList);
         return "employees-list";

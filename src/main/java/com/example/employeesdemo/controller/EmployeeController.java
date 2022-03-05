@@ -1,41 +1,39 @@
 package com.example.employeesdemo.controller;
 
 import com.example.employeesdemo.entity.Employee;
-import com.example.employeesdemo.repository.EmployeeRepository;
-import com.example.employeesdemo.thymeleaf.services.EmployeeService;
+import com.example.employeesdemo.thymeleaf.services.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class EmployeeController {
 
     @Autowired
-    private EmployeeService employeeService;
+    private EmployeeServiceImpl employeeServiceImpl;
 
     @GetMapping("/employees")
     public List<Employee> getEmployees() {
-        return employeeService.getAllEmployees();
+        return employeeServiceImpl.getAllEmployees();
     }
 
     @GetMapping("/employee/{id}")
     public ResponseEntity<Employee> getEmployee(@PathVariable Long id) {
-        Employee employee = employeeService.getEmployeeById(id);
+        Employee employee = employeeServiceImpl.getEmployeeById(id);
 
         return new ResponseEntity(employee, HttpStatus.OK);
     }
 
     @PostMapping("/employees")
     public Employee getEmployees(@RequestBody Employee employee) {
-        return employeeService.saveEmployee(employee);
+        return employeeServiceImpl.saveEmployee(employee);
     }
 
     @DeleteMapping("/employees/{id}")
     public void getEmployees(@PathVariable Long id) {
-        employeeService.deleteEmployee(id);
+        employeeServiceImpl.deleteEmployee(id);
     }
 }
